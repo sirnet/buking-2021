@@ -8,9 +8,10 @@ const getRandomNumber = (min, max, numberCharacters) => {
   }
 
   let random = Math.random() * (max - min + 1) + min;
-  random = random.toFixed(numberCharacters);
-  return random;
+  return random.toFixed(numberCharacters);
 
 };
 
 getRandomNumber(3,2,3);
+
+
