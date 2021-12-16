@@ -1,12 +1,14 @@
+let advert = [];
+
 const AVATAR = [
-  'img/avatars/user01.png',
-  'img/avatars/user02.png',
-  'img/avatars/user03.png',
-  'img/avatars/user04.png',
-  'img/avatars/user05.png',
-  'img/avatars/user06.png',
-  'img/avatars/user07.png',
-  'img/avatars/user08.png',
+  'img/avatars/user',
+  'img/avatars/user',
+  'img/avatars/user',
+  'img/avatars/user',
+  'img/avatars/user',
+  'img/avatars/user',
+  'img/avatars/user',
+  'img/avatars/user'
 ];
 
 const TITLES = [
@@ -47,13 +49,23 @@ const DESCRIPTIONS = [
 ];
 
 const PHOTOS = [
-  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
+  'http://o0.github.io/assets/images/tokyo/hotel',
+  'http://o0.github.io/assets/images/tokyo/hotel',
+  'http://o0.github.io/assets/images/tokyo/hotel'
 ];
 
-const SIMILAR_ADS_COUNT = 10;
+const LOCATION = {
+  x : [
+    35.65000,
+    35.70000
+  ],
+  y : [
+    139.70000,
+    139.80000
+  ]
+};
 
+const SIMILAR_ADS_COUNT = 10;
 
 const getRandomNumber = (min, max, numberCharacters) => {
   if(min < 0 || max < 0) {
@@ -74,11 +86,33 @@ const getRandomArrayElement = (elements) => {
 };
 
 const  createAds = () => {
-  return author = {
-    avatar : getRandomArrayElement(AVATAR)
+  for (let i = 0; i < SIMILAR_ADS_COUNT; i++){
+    advert.push({
+      author :{
+        avatar : AVATAR[i] + 0 +(i+1) + '.png'
+      },
+      offer :{
+        title   : getRandomArrayElement(TITLES),
+        address : {
+          location : {
+            x   :  getRandomNumber(LOCATION.x[0], LOCATION.x[1],5),
+            y   :  getRandomNumber(LOCATION.y[0], LOCATION.y[1],5)
+          }
+        },
+        price       : getRandomNumber(1,900000,0),
+        type        : getRandomArrayElement(TYPES),
+        rooms       : getRandomNumber(1,5,0),
+        guests      : getRandomNumber(1,5,0),
+        checkin     : getRandomArrayElement(CHECKINS),
+        checkout    : getRandomArrayElement(CHECKINS),
+        features    : getRandomArrayElement(FEATURES),
+        description : getRandomArrayElement(DESCRIPTIONS),
+        photos      : getRandomArrayElement(PHOTOS)
+      }
+    })
   }
 };
 
-const infoAds = new Array(SIMILAR_ADS_COUNT).fill(null).map(() => createAds());
-console.log(infoAds);
-getRandomNumber(3,2,3);
+createAds();
+console.log(advert);
+
