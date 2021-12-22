@@ -1,4 +1,4 @@
-import {advert} from './data.js'
+import {advert} from './data.js';
 
 console.log(advert);
 

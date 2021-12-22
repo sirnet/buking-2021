@@ -82,7 +82,7 @@ const  createAds = () => {
         description : getRandomArrayElement(DESCRIPTIONS),
         photos      : 'http://o0.github.io/assets/images/tokyo/hotel' + getRandomNumber(1,3,0) + '.jpg'
       }
-    })
+    });
   }
 };
 
