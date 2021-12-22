@@ -2,17 +2,6 @@ import {getRandomNumber, getRandomArrayElement} from './util.js';
 
 let advert = [];
 
-const AVATAR = [
-  'img/avatars/user',
-  'img/avatars/user',
-  'img/avatars/user',
-  'img/avatars/user',
-  'img/avatars/user',
-  'img/avatars/user',
-  'img/avatars/user',
-  'img/avatars/user'
-];
-
 const TITLES = [
   'Продажа лучшей квартиры',
   'Куплю квартиру',
@@ -51,7 +40,7 @@ const DESCRIPTIONS = [
 ];
 
 const PHOTOS = [
-  'http://o0.github.io/assets/images/tokyo/hotel',
+  '',
   'http://o0.github.io/assets/images/tokyo/hotel',
   'http://o0.github.io/assets/images/tokyo/hotel'
 ];
@@ -73,7 +62,7 @@ const  createAds = () => {
   for (let i = 0; i < SIMILAR_ADS_COUNT; i++){
     advert.push({
       author :{
-        avatar : AVATAR[i] + 0 +(i+1) + '.png'
+        avatar : 'img/avatars/user' + 0 +(i + 1) + '.png'
       },
       offer :{
         title   : getRandomArrayElement(TITLES),
@@ -91,7 +80,7 @@ const  createAds = () => {
         checkout    : getRandomArrayElement(CHECKINS),
         features    : getRandomArrayElement(FEATURES),
         description : getRandomArrayElement(DESCRIPTIONS),
-        photos      : getRandomArrayElement(PHOTOS)
+        photos      : 'http://o0.github.io/assets/images/tokyo/hotel' + getRandomNumber(1,3,0) + '.jpg'
       }
     })
   }
