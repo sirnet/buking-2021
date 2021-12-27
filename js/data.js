@@ -39,12 +39,6 @@ const DESCRIPTIONS = [
   'есть ли декор, каков стиль помещения'
 ];
 
-const PHOTOS = [
-  '',
-  'http://o0.github.io/assets/images/tokyo/hotel',
-  'http://o0.github.io/assets/images/tokyo/hotel'
-];
-
 const LOCATION = {
   x : [
     35.65000,
