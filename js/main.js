@@ -1,4 +1,4 @@
-import {advert} from './data.js';
+import './data.js';
+import './card.js';
 
-console.log(advert);
 

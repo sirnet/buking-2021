@@ -78,8 +78,7 @@ const  createAds = () => {
       }
     });
   }
+  return advert;
 };
 
-createAds();
-
-export {advert};
+export {createAds};
