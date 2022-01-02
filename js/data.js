@@ -52,11 +52,24 @@ const LOCATION = {
 
 const SIMILAR_ADS_COUNT = 10;
 
+const getFeatures = (e) => {
+  let features = [];
+  for (let i = 0; i <= getRandomNumber(1,6,0) - 1; i++){
+    let element = getRandomArrayElement(e);
+      if (features.includes(element)){
+        i--;
+      } else {
+        features.push(element);
+      }
+  }
+  return features;
+}
+
 const  createAds = () => {
   for (let i = 0; i < SIMILAR_ADS_COUNT; i++){
     advert.push({
       author :{
-        avatar : 'img/avatars/user' + 0 +(i + 1) + '.png'
+        avatar : (i < 9) ? 'img/avatars/user' + 0 + (i + 1) + '.png' : 'img/avatars/user' + (i + 1) + '.png'
       },
       offer :{
         title   : getRandomArrayElement(TITLES),
@@ -72,7 +85,7 @@ const  createAds = () => {
         guests      : getRandomNumber(1,5,0),
         checkin     : getRandomArrayElement(CHECKINS),
         checkout    : getRandomArrayElement(CHECKINS),
-        features    : getRandomArrayElement(FEATURES),
+        features    : getFeatures(FEATURES),
         description : getRandomArrayElement(DESCRIPTIONS),
         photos      : 'http://o0.github.io/assets/images/tokyo/hotel' + getRandomNumber(1,3,0) + '.jpg'
       }
