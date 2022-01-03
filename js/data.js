@@ -14,7 +14,7 @@ const TYPES = [
   'palace',
   'flat',
   'house',
-  'bunglalow'
+  'bungalow'
 ];
 
 const CHECKINS = [
