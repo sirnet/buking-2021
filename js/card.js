@@ -51,6 +51,8 @@ const formAds = ({title, address, price, type, rooms, guests, checkin, checkout,
 };
 
 //preparedAds.forEach((e) => {
-  const wizardElement = formAds(preparedAds[0].offer, preparedAds[0].author);
-  mapCanvas.appendChild(wizardElement);
+  //const wizardElement = formAds(preparedAds[0].offer, preparedAds[0].author);
+  //mapCanvas.appendChild(wizardElement);
 //});
+
+export {formAds, preparedAds};

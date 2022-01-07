@@ -1,8 +1,41 @@
+import {toggleDisabled} from './loadmap.js';
+
 const typeDigs = document.querySelector('#type');
 const typePrice = document.querySelector('#price');
 
 const timein = document.querySelector('#timein');
 const timeout = document.querySelector('#timeout');
+
+const adForm = document.querySelector('.ad-form');
+
+const mapFilter = document.querySelector('.map__filters');
+
+const address = document.querySelector('#address');
+address.setAttribute("readonly", "");
+
+if (toggleDisabled === 'disabled') {
+  adForm.classList.add('ad-form--disabled');
+  mapFilter.classList.add('ad-form--disabled');
+} else {
+  adForm.classList.remove('ad-form--disabled');
+  mapFilter.classList.remove('ad-form--disabled');
+}
+
+const addDisabled = function(value = null){
+  if(toggleDisabled === 'disabled'){
+    value.setAttribute("disabled", toggleDisabled);
+  } else {
+    value.removeAttribute("disabled");
+  }
+}
+
+for (const [key, value] of Object.entries(adForm)) {
+  addDisabled(value);
+}
+
+for (const [key, value] of Object.entries(mapFilter)) {
+  addDisabled(value);
+}
 
 typeDigs.addEventListener ('change', function() {
   switch (typeDigs.value) {
@@ -40,3 +73,5 @@ timeout.addEventListener ('change', function() {
       return timein.selectedIndex = 2;
   }
 });
+
+export {address};
