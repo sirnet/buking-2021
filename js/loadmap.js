@@ -41,6 +41,7 @@ const mainPinMarker = L.marker(
 mainPinMarker.on('moveend', (evt) => {
   let position = evt.target.getLatLng();
   address.value = Math.round(position['lat'] * 10000)/10000 + ' ' + Math.round(position['lng'] * 1000)/1000;
+  address.setAttribute("readonly", "");
 });
 
 mainPinMarker.addTo(map);

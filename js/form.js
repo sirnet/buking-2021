@@ -11,7 +11,7 @@ const adForm = document.querySelector('.ad-form');
 const mapFilter = document.querySelector('.map__filters');
 
 const address = document.querySelector('#address');
-address.setAttribute("readonly", "");
+
 
 if (toggleDisabled === 'disabled') {
   adForm.classList.add('ad-form--disabled');
