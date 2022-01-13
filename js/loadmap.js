@@ -1,5 +1,6 @@
 import './form.js';
-import {formAds, preparedAds} from './card.js';
+import { formAds } from './card.js';
+import './server.js';
 
 let toggleDisabled = 'disabled';
 
@@ -46,28 +47,32 @@ mainPinMarker.on('moveend', (evt) => {
 
 mainPinMarker.addTo(map);
 
-preparedAds.forEach((value) => {
-  const icon = L.icon({
-    iconUrl: '/img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+const dataAds = (data) => {
+  data.forEach((value) => {
+    const icon = L.icon({
+      iconUrl: '/img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
+
+    const marker = L.marker({
+      lat: value.location.lat,
+      lng: value.location.lng,
+    },
+    {
+      icon,
+    });
+    marker
+      .addTo(map)
+      .bindPopup(
+        formAds(value.offer, value.author, value.location),
+        {
+          keepInView: true,
+        }
+      );
   });
 
-  const marker = L.marker({
-    lat: value.offer.address.location.x,
-    lng: value.offer.address.location.y,
-  },
-  {
-    icon,
-  });
-  marker
-    .addTo(map)
-    .bindPopup(
-      formAds(value.offer, value.author),
-      {
-        keepInView: true,
-      }
-    );
-});
+}
 
-export {toggleDisabled};
+export { dataAds };
+export { toggleDisabled };
