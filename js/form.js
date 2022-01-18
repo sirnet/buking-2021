@@ -27,7 +27,7 @@ const addDisabled = function(value = null){
   } else {
     value.removeAttribute("disabled");
   }
-}
+};
 
 for (const [key, value] of Object.entries(adForm)) {
   addDisabled(value);

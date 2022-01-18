@@ -8,11 +8,7 @@ const checkStatus = (response) => {
 
   const {statusText, status} = response;
   throw new Error(`${status} — ${statusText}`);
-}
-
-const dataCheckout = (data) => {
-  preparedAds = data;
-}
+};
 
 fetch ('https://23.javascript.pages.academy/keksobooking/data/')
   .then(checkStatus)
