@@ -4,8 +4,6 @@ import './server.js';
 
 let toggleDisabled = 'disabled';
 
-
-
 const map = L.map('map-canvas')
   .on('load', () => {
     toggleDisabled = "";
@@ -73,9 +71,6 @@ const dataAds = (data) => {
       );
   });
 };
-
-
-
 
 export { dataAds };
 export { toggleDisabled };
