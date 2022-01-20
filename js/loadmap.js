@@ -46,39 +46,37 @@ mainPinMarker.on('moveend', (evt) => {
 });
 
 mainPinMarker.addTo(map);
-var marker = null;
-
+var markerSloi = new L.layerGroup();
 const dataAds = (data) => {
-  if (marker != null){
-    marker.remove();
-    console.log(marker);
-  }
+if(markerSloi != undefined){
+  markerSloi.clearLayers();
+}
   data.forEach((value) => {
     const icon = L.icon({
       iconUrl: '/img/pin.svg',
       iconSize: [40, 40],
       iconAnchor: [20, 40],
     });
-    marker = L.marker({
+    const marker = L.marker({
       lat: value.location.lat,
       lng: value.location.lng,
     },
     {
       icon,
     });
-
     marker
-      .addTo(map)
       .bindPopup(
         formAds(value.offer, value.author, value.location),
         {
           keepInView: true,
         }
       );
-
+      markerSloi.addLayer(marker);
   });
-};
+  map.addLayer(markerSloi);
 
+};
+export { markerSloi };
 export { dataAds };
 export { toggleDisabled };
 

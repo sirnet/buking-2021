@@ -1,4 +1,4 @@
-import { dataAds} from './loadmap.js';
+import { dataAds, markerSloi} from './loadmap.js';
 import { getRandomArrayElement } from './util.js';
 let dataArray = [];
 let dataSort = [];
