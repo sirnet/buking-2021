@@ -63,7 +63,7 @@ const getFeatures = (e) => {
       }
   }
   return features;
-}
+};
 
 const  createAds = () => {
   for (let i = 0; i < SIMILAR_ADS_COUNT; i++){

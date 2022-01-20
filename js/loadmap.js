@@ -46,21 +46,27 @@ mainPinMarker.on('moveend', (evt) => {
 });
 
 mainPinMarker.addTo(map);
+var marker = null;
 
 const dataAds = (data) => {
+  if (marker != null){
+    marker.remove();
+    console.log(marker);
+  }
   data.forEach((value) => {
     const icon = L.icon({
       iconUrl: '/img/pin.svg',
       iconSize: [40, 40],
       iconAnchor: [20, 40],
     });
-    const marker = L.marker({
+    marker = L.marker({
       lat: value.location.lat,
       lng: value.location.lng,
     },
     {
       icon,
     });
+
     marker
       .addTo(map)
       .bindPopup(
@@ -69,6 +75,7 @@ const dataAds = (data) => {
           keepInView: true,
         }
       );
+
   });
 };
 

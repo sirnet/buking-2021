@@ -1,9 +1,10 @@
-import { dataAds } from './loadmap.js';
-import { getRandomArrayElement } from './util.js'
+import { dataAds} from './loadmap.js';
+import { getRandomArrayElement } from './util.js';
 let dataArray = [];
+let dataSort = [];
 
-const mapFilters = document.querySelector('.map__filters');
-console.log(mapFilters.querySelector('#housing-type'));
+const houseType = document.querySelector('#housing-type');
+
 const checkStatus = (response) => {
   if (response.ok) {
     return response;
@@ -14,12 +15,26 @@ const checkStatus = (response) => {
 };
 
 const dataUpload = (posts) => {
+  dataArray = posts;
   for (let i = 0; i < 10; i ++) {
-    dataArray[i] = getRandomArrayElement(posts);
+    dataSort[i] = getRandomArrayElement(posts);
   }
-  console.log(dataArray);
-  dataAds(dataArray);
-}
+  dataAds(dataSort);
+};
+
+const filterHouse = (houseValue) => {
+  let sortDataArray = [];
+  dataArray.forEach((value, index) => {
+    if (value.offer.type === houseValue){
+        sortDataArray[index] = value;
+    }
+  });
+  dataAds(sortDataArray);
+};
+
+houseType.addEventListener('change', function (){
+  filterHouse(houseType.value);
+});
 
 fetch ('https://23.javascript.pages.academy/keksobooking/data/')
   .then(checkStatus)
@@ -27,7 +42,4 @@ fetch ('https://23.javascript.pages.academy/keksobooking/data/')
   .then((posts) => dataUpload(posts))
   .catch((error) => console.log(error));
 
-document.querySelector('#housing-type').addEventListener('click', function (evt){
-  let houseType = evt;
-  console.log(houseType)
-});
+
