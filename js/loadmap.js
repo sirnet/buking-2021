@@ -47,10 +47,9 @@ mainPinMarker.on('moveend', (evt) => {
 
 mainPinMarker.addTo(map);
 var markerSloi = new L.layerGroup();
+
 const dataAds = (data) => {
-if(markerSloi != undefined){
-  markerSloi.clearLayers();
-}
+markerSloi.clearLayers();
   data.forEach((value) => {
     const icon = L.icon({
       iconUrl: '/img/pin.svg',
