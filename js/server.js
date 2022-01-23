@@ -12,8 +12,7 @@ const checkStatus = (response) => {
 };
 
 const dataUpload = (posts) => {
-  console.log(posts);
-  dataArray = posts;
+  dataArray = Object.assign(posts);
   for (let i = 0; i < 10; i ++) {
     dataSort[i] = posts[i];
   }
