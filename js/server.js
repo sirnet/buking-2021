@@ -2,6 +2,7 @@ import { dataAds } from './loadmap.js';
 
 let dataArray = [];
 let dataSort = [];
+let sortGlobalArray = [];
 
 const checkStatus = (response) => {
   if (response.ok) {
@@ -13,7 +14,8 @@ const checkStatus = (response) => {
 
 const dataUpload = (posts) => {
   dataArray = Object.assign(posts);
-  for (let i = 0; i < 10; i ++) {
+  sortGlobalArray = Object.assign(posts);
+  for (let i = 0; i <= 10; i ++) {
     dataSort[i] = posts[i];
   }
   dataAds(dataSort);
@@ -26,3 +28,5 @@ fetch ('https://23.javascript.pages.academy/keksobooking/data/')
   .catch((error) => console.log(error));
 
 export { dataArray };
+export { sortGlobalArray };
+export { dataUpload };

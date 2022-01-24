@@ -1,5 +1,5 @@
 import { dataAds } from './loadmap.js';
-import { dataArray } from './server.js';
+import { dataArray, dataUpload, sortGlobalArray } from './server.js';
 
 const houseType = document.querySelector('#housing-type');
 const housePrice = document.querySelector('#housing-price');
@@ -7,44 +7,23 @@ const housingRooms = document.querySelector('#housing-rooms');
 const housingGuests = document.querySelector('#housing-guests');
 const housingFeatures = document.querySelector('#housing-features');
 
-
-let toggleCheck = false;
-let houseTypeCheck = 'any';
-let housePriceCheck = 'any';
-let houseRoomsCheck = 'any';
-let houseGuestCheck = 'any';
 let houseFeatureCheck = [];
 
-
+let sortArray = [];
 
 houseType.addEventListener('change', function (){
-  let sortDataArray = [];
-  let i = 0;
-  console.log(dataArray);
-    dataArray.forEach((value) => {
-      if (value.offer.type === houseType.value){
-          sortDataArray[i] = value;
-          i++;
-      }
-  });
-  //dataArray = [];
-  console.log(dataArray);
-  dataAds(sortDataArray);
-  //filterAds();
+  filterAds();
 });
 
 housePrice.addEventListener('change', function (){
-  housePriceCheck = housePrice.value;
   filterAds();
 });
 
 housingRooms.addEventListener('change', function (){
-  houseRoomsCheck = housingRooms.value;
   filterAds();
 });
 
 housingGuests.addEventListener('change', function (){
-  houseGuestCheck = housingGuests.value;
   filterAds();
 });
 
@@ -60,64 +39,81 @@ housingFeatures.addEventListener('change', function (e){
   if(e.target.checked){
     houseFeatureCheck.push(e.target.value);
   }
-  filterAds();
+  filterAds(houseFeatureCheck);
 });
 
-const filterAds = () => {
-  console.log(houseTypeCheck, housePriceCheck, houseRoomsCheck, houseGuestCheck, houseFeatureCheck);
+const filterAds = (array = {}) => {
+  sortArray = [];
+  sortArray = dataArray.slice(0, dataArray.length-1);
+  if(houseType.value != 'any'){
+    sortArray.forEach((value, index) => {
+      if (value.offer.type != houseType.value){
+          delete sortArray[index];
+      }
+    });
+    sortArray = _.compact(sortArray);
+  }
 
+  if(housePrice.value != 'any'){
+    if(housePrice.value === 'middle'){
+      sortArray.forEach((value, index) => {
+        if (value.offer.price <= 10000 || value.offer.price >= 50000){
+          delete sortArray[index];
+        }
+      });
+    }
+    if(housePrice.value === 'low'){
+      sortArray.forEach((value, index) => {
+        if (value.offer.price >= 10000){
+          delete sortArray[index];
+        }
+      });
+    }
+    if(housePrice.value === 'high'){
+      sortArray.forEach((value, index) => {
+        if (value.offer.price <= 50000){
+          delete sortArray[index];
+        }
+      });
+    }
+  sortArray = _.compact(sortArray);
+}
+
+if(housingRooms.value != 'any'){
+  sortArray.forEach((value, index) => {
+    if (value.offer.rooms != housingRooms.value){
+        delete sortArray[index];
+    }
+  });
+  sortArray = _.compact(sortArray);
+}
+
+if(housingGuests.value != 'any'){
+  sortArray.forEach((value, index) => {
+    if (value.offer.guests != housingGuests.value){
+        delete sortArray[index];
+    }
+  });
+  sortArray = _.compact(sortArray);
+}
+if(array.length != 0 && array.length != undefined){
+  sortArray.forEach((value, index) => {
+    if (JSON.stringify(value.offer.features) != JSON.stringify(array)){
+        delete sortArray[index];
+    }
+  });
+  sortArray = _.compact(sortArray);
+}
+
+if(houseType.value === 'any' && housePrice.value === 'any' &&
+  housingRooms.value === 'any' && housingGuests.value === 'any' &&
+  (array.length === 0 || array.length === undefined)){
+  dataUpload(sortGlobalArray);
+} else {
+  let arrayBlock = [];
+  for (let i = 0; i <= 10; i ++) {
+    if(sortArray[i] != undefined) arrayBlock[i] = sortArray[i];
+  }
+  dataAds(arrayBlock);
+}
 };
-
-
-// housePrice.addEventListener('change', function (){
-//   housePrice.options[housePriceCheck].removeAttribute('selected');
-//   housePriceCheck = housePrice.selectedIndex;
-//   housePrice.options[housePriceCheck].setAttribute('selected', 'selected');
-// });
-
-// housingRooms.addEventListener('change', function (){
-//   housingRooms.options[houseRoomsCheck].removeAttribute('selected');
-//   houseRoomsCheck = housingRooms.selectedIndex;
-//   housingRooms.options[houseRoomsCheck].setAttribute('selected', 'selected');
-// });
-
-// housingGuests.addEventListener('change', function (){
-//   housingGuests.options[houseGuestCheck].removeAttribute('selected');
-//   houseGuestCheck = housingGuests.selectedIndex;
-//   housingGuests.options[houseGuestCheck].setAttribute('selected', 'selected');
-// });
-
-// housingFeatures.addEventListener('change', function (e){
-//   console.log(e.target.value);
-// });
-
-// const filterHouse = (houseValue) => {
-//   let sortDataArray = [];
-//   dataArray.forEach((value, index) => {
-//     if (value.offer.type === houseValue){
-//         sortDataArray[index] = value;
-//     }
-//   });
-
-//   dataAds(sortDataArray);
-// };
-
-// houseType.addEventListener('change', function (){
-//   if(houseType.value === 'any'){
-//      toggleCheck = false;
-//    } else {
-//      toggleCheck = true;
-//      filterHouse(houseType.value);
-//    }
-
-// });
-
-// housePrice.addEventListener('change', function (){
-//   if(housePrice.value === 'any'){
-//      toggleCheck = false;
-//    } else {
-//      toggleCheck = true;
-//      filterHouse(housePrice.value);
-//    }
-
-// });
